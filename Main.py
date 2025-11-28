@@ -2,6 +2,7 @@
 
 import pygame 
 import time
+import objects
 
 pygame.init()
 
@@ -12,17 +13,23 @@ Screen_Height = 320
 #Makes a camera, Screen, and player
 Screen = pygame.display.set_mode((Screen_Height, Screen_Height))
 player = pygame.Rect((80, 72, 32, 32))
-Map = pygame.image.load('data', 'bla.png')
+Map = pygame.image.load("textures/Map test.png")
+Map_rect = Map.get_rect()
 #Wall = pygame.rect((200, 120, 32, 32))
 #camera = 
+
+crate_g = pygame.sprite.Group()
+c = objects.Crate(0, 0)
+crate_g.add(c)
 
 #this is the game loop
 run = True
 while run == True:
-    print(player)
+
     #this referches and draws the screen
     Screen.fill((0, 0, 0))
     pygame.draw.rect(Screen, (255, 255, 255), player)
+    crate_g.draw(Screen)
 
     #checks for moverment
     time.sleep(0.08) 
