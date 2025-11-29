@@ -52,3 +52,38 @@ class Wall(pygame.sprite.Sprite):
         self.image = pygame.image.load("textures/Wall.png")
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
+
+class FREE(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/Free.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+class SPIKE(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/Spike.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+class LEVER(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/Lever.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+class ICE(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/Ice.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+class WWT(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/WWT.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
