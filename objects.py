@@ -20,26 +20,59 @@ class Player(pygame.sprite.Sprite):
             self.dir = pygame.Vector2(0,0)
             Key = pygame.key.get_pressed()
             if Key[pygame.K_w] == True: 
-                # for i in range(self.groups_list[1]):
-                #     walls_position = self.groups_list[1][i]
-                #     if  walls_position == (self.rect.topleft[0] + 0, self.rect.topleft[1] - 32):
-                #         Key[pygame.K_w] = False
-                # else:   
-                #     Key[pygame.K_w] = True
-                # check if wall in front of us
-                # if no wall above us move
-                # else: don't 
-                self.rect.move_ip(0, -32)
-                self.dir.y = -1
+                wall_above = False
+                
+                # After this runs, wall_above is True if there is a wall, and False if there is no wall
+                for wall in self.groups_list['WALL']: 
+                    walls_position = wall.rect.topleft
+                    if  walls_position == (self.rect.topleft[0] + 0, self.rect.topleft[1] - 32): #If you try to walk through the block the input doesn't do anything
+                        wall_above = True
+                # wall_above = True
+
+                if wall_above == False: # If there is no wall above us, we move
+                    self.rect.move_ip(0, -32)
+                    self.dir.y = -1
             elif Key[pygame.K_a] == True:
-                self.rect.move_ip(-32, 0)
-                self.dir.x = -1
+                wall_above = False
+                
+                # After this runs, wall_above is True if there is a wall, and False if there is no wall
+                for wall in self.groups_list['WALL']: #warning,list will break,switch to dict
+                    walls_position = wall.rect.topleft
+                    if  walls_position == (self.rect.topleft[0] - 32, self.rect.topleft[1] + 0): #If you try to walk through the block the input doesn't do anything
+                        wall_above = True
+                        wall_above = True
+                # wall_above = True
+
+                if wall_above == False: # If there is no wall above us, we move
+                    self.rect.move_ip(-32, 0) 
+                    self.dir.x = -1
             elif Key[pygame.K_s] == True:
-                self.rect.move_ip(0, +32)
-                self.dir.y = 1
+                wall_above = False
+                
+                # After this runs, wall_above is True if there is a wall, and False if there is no wall
+                for wall in self.groups_list['WALL']: #warning,list will break,switch to dict
+                    walls_position = wall.rect.topleft
+                    if  walls_position == (self.rect.topleft[0] + 0, self.rect.topleft[1] + 32 ): #If you try to walk through the block the input doesn't do anything
+                        wall_above = True
+                        wall_above = True
+                # wall_above = True
+
+                if wall_above == False: # If there is no wall above us, we move
+                    self.rect.move_ip(0, +32)
+                    self.dir.y = 1
             elif Key[pygame.K_d] == True:
-                self.rect.move_ip(+32, 0)
-                self.dir.x = 1
+                wall_above = False
+                
+                # After this runs, wall_above is True if there is a wall, and False if there is no wall
+                for wall in self.groups_list['WALL']: #warning,list will break,switch to dict
+                    walls_position = wall.rect.topleft
+                    if  walls_position == (self.rect.topleft[0] + 32, self.rect.topleft[1] + 0):
+                        wall_above = True
+                # wall_above = True
+
+                if wall_above == False: # If there is no wall above us, we move
+                    self.rect.move_ip(+32, 0)
+                    self.dir.x = 1
             self.timer = 0
         #pushing crates
         Crates = pygame.sprite.spritecollide(self, self.groups_list['CRATE'], False)
