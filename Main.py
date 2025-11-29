@@ -52,7 +52,6 @@ while run == True:
     Screen.blit(Camera_img,(0, 0), Camera_rect)
 
     if len(player_g.sprites()) == 0:
-        time.sleep(3)
         player = setup_game()
 
     #this is the event loop

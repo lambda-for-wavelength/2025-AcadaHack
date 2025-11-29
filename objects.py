@@ -45,6 +45,21 @@ class Player(pygame.sprite.Sprite):
         if len(Crates):
             for c in Crates:
                 c.rect.move_ip(32 * self.dir.x, 32 * self.dir.y)
+
+                other_crate = pygame.sprite.spritecollide(c, self.groups_list['CRATE'], False)
+                if len(other_crate) != 1:
+                    #move player and crate back
+
+                    c.rect.move_ip(32 * - self.dir.x, 32 * - self.dir.y)
+                    self.rect.move_ip(32 * - self.dir.x, 32 * - self.dir.y)  
+
+                if pygame.sprite.spritecollide(c, self.groups_list['WALL'], False) or pygame.sprite.spritecollide(c, self.groups_list['SPIKE'], False):
+                    #move player and crate back
+
+                    c.rect.move_ip(32 * - self.dir.x, 32 * - self.dir.y)
+                    self.rect.move_ip(32 * - self.dir.x, 32 * - self.dir.y)  
+                    
+                    
         Spikes = pygame.sprite.spritecollide(self, self.groups_list['SPIKE'], False)
         if len(Spikes):
             for s in Spikes:
