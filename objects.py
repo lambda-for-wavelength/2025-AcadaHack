@@ -42,7 +42,7 @@ class Player(pygame.sprite.Sprite):
                 self.dir.x = 1
             self.timer = 0
         #pushing crates
-        Crates = pygame.sprite.spritecollide(self, self.groups_list[0], False)
+        Crates = pygame.sprite.spritecollide(self, self.groups_list['CRATE'], False)
         if len(Crates):
             for c in Crates:
                 c.rect.move_ip(32 * self.dir.x, 32 * self.dir.y)
@@ -59,5 +59,40 @@ class Wall(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("textures/Wall.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+class Free(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/Free.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+class Spike(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/Spike.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+class Lever(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/Lever.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+class Ice(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/Ice.png")
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+class WWT(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("textures/WWT.png")
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
