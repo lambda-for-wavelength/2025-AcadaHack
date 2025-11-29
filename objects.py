@@ -43,20 +43,60 @@ class Player(pygame.sprite.Sprite):
                 c.rect.move_ip(32 * self.dir.x, 32 * self.dir.y)
 
     def player_terrain_interaction(self, x: int, y: int):
-        wall_above = False
-                        
         
+        # Check if about to move into a wall
+        wall_above = False
         for wall in self.groups_list['WALL']: 
             walls_position = wall.rect.topleft
             if  walls_position == (self.rect.topleft[0] + x, self.rect.topleft[1] + y): #If you try to walk through the block the input doesn't do anything
                 wall_above = True
 
-         
+        # Move if no wall right in front of us
+        # if wall_above == False: # If there is no wall above us, we move
+        #     self.rect.move_ip(x, y)
+        #     self.dir.y = (y/32)
+        #     self.dir.x = (x/32)
 
-        if wall_above == False: # If there is no wall above us, we move
+             # Check if about to move into a Ice
+        ice_beside = False
+        for ice in self.groups_list['ICE']: 
+            ice_position = ice.rect.topleft
+            if  ice_position == (self.rect.topleft[0] + x, self.rect.topleft[1] + y): #If you try to walk through the block the input doesn't do anything
+                ice_beside = True
+
+        crate_beside = False
+        crate_beside2 = False
+        if  ice_beside == True and wall_above == False:
+            while ice_beside == True and wall_above == False: #on ice, with no wall
+                self.rect.move_ip(x, y) # ONLY MOVES ON ICE
+                self.dir.y = (y/32) 
+                self.dir.x = (x/32)
+                wall_above = False
+                ice_beside =False
+                # Scans every wall, and stops us from phasing
+                for wall in self.groups_list['WALL']: 
+                    walls_position = wall.rect.topleft
+                    if  walls_position == (self.rect.topleft[0] + x, self.rect.topleft[1] + y): #If you try to walk through the block the input doesn't do anything
+                        wall_above = True 
+                # make us skate on ice
+                for ice in self.groups_list['ICE']: 
+                    ice_position = ice.rect.topleft   
+                    if ice_position == (self.rect.topleft[0], self.rect.topleft[1]): #If you try to walk through the block the input doesn't do anything
+                        ice_beside = True     
+        elif wall_above == False: # If there is no wall above us, we move
             self.rect.move_ip(x, y)
             self.dir.y = (y/32)
             self.dir.x = (x/32)
+        for crate in self.groups_list['CRATE']:
+            crate_position = crate.rect.topleft
+            if crate_position == (self.rect.topleft[0] + 0, self.rect.topleft[1] - y):
+                crate_beside = True
+            if crate_position == (self.rect.topleft[0] + 0, self.rect.topleft[1] - y*2):
+                crate_beside2 = True
+            if crate_beside ==True and crate_beside2 == True: 
+                (self.rect.topleft[0] + x, self.rect.topleft[1] + y)
+
+
             
 class Crate(pygame.sprite.Sprite):
     def __init__(self, x, y):
