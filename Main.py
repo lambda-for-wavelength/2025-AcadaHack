@@ -31,7 +31,7 @@ def setup_game():
     player = objects.Player(64, 32*30)
     player_g.add(player)
     #this crats the list groups
-    Map_camera.gen_map(pygame.image.load("textures/Map final.png"), groups)
+    Map_camera.gen_map(pygame.image.load("textures/Map test final.png"), groups)
     player.groups_list = groups
     return player
 

@@ -47,7 +47,6 @@ class Player(pygame.sprite.Sprite):
                 c.rect.move_ip(32 * self.dir.x, 32 * self.dir.y)
         Spikes = pygame.sprite.spritecollide(self, self.groups_list['SPIKE'], False)
         if len(Spikes):
-            print("st")
             for s in Spikes:
                 if s.frame:
                     distroy_game(self.groups_list)
