@@ -2,6 +2,10 @@ import pygame
 
 TICK_RATE = 80
 
+def distroy_game(groups):
+    for i in groups.values():
+        i.empty()
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -41,6 +45,14 @@ class Player(pygame.sprite.Sprite):
         if len(Crates):
             for c in Crates:
                 c.rect.move_ip(32 * self.dir.x, 32 * self.dir.y)
+        Spikes = pygame.sprite.spritecollide(self, self.groups_list['SPIKE'], False)
+        if len(Spikes):
+            print("st")
+            for s in Spikes:
+                if s.frame:
+                    distroy_game(self.groups_list)
+                    self.kill()
+    
 
     def player_terrain_interaction(self, x: int, y: int):
         
@@ -95,8 +107,6 @@ class Player(pygame.sprite.Sprite):
                 crate_beside2 = True
             if crate_beside ==True and crate_beside2 == True: 
                 (self.rect.topleft[0] + x, self.rect.topleft[1] + y)
-
-
             
 class Crate(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -122,9 +132,23 @@ class Free(pygame.sprite.Sprite):
 class Spike(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("textures/Spike.png")
+        self.image = pygame.Surface((32, 32))
+        self.sheet = pygame.image.load("textures/Spike sheet.png")
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
+        self.frame = 0
+        self.time_f = [1000, 2000, 3000]
+        self.timer = 0
+    def update(self, dt):
+        self.timer += dt
+        for i in self.time_f:
+            if self.timer <= i:
+                self.image.blit(self.sheet, (0, 0), pygame.Rect(0, self.frame * 32, 32, 32))
+            else:
+                self.frame += 1
+        if self.timer > self.time_f[-1]:
+            self.timer = 0
+            self.frame = 0
 
 class Lever(pygame.sprite.Sprite):
     def __init__(self, x, y):
