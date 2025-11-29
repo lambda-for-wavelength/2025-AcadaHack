@@ -22,21 +22,15 @@ dt = 0
 #Wall = pygame.rect((200, 120, 32, 32))
 #camera = 
 
+#this crats all the groups
 crate_g = pygame.sprite.Group()
-c = objects.Crate(64, 64)
-crate_g.add(c)
-
 wall_g = pygame.sprite.Group()
-w = objects.Wall(128, 128)
-wall_g.add(w)
-
 free_g = pygame.sprite.Group()
 spike_g = pygame.sprite.Group()
 lever_g = pygame.sprite.Group()
 ice_g = pygame.sprite.Group()
 wwt_g = pygame.sprite.Group()
-
-groups = {'CRATE':crate_g, 'WALL':wall_g, 'FREE':free_g, 'SPIKE':spike_g, 'LEVER':lever_g, 'ICE':ice_g, 'WWT':wwt_g}
+groups = {'WALL':wall_g, 'FREE':free_g, 'SPIKE':spike_g, 'LEVER':lever_g, 'ICE':ice_g, 'WWT':wwt_g, 'CRATE':crate_g}
 Map_camera.gen_map(pygame.image.load("textures/Map final.png"), groups)
 player.groups_list = groups
 
@@ -48,12 +42,11 @@ while run == True:
     Camera_rect.center = (player.rect.center[0], player.rect.center[1])
     Screen.fill((0, 0, 0))
     Camera_img.fill((0, 0, 0))
+    for i in groups.values():
+        i.draw(Camera_img)
+        i.update(dt)
     Camera_img.blit(player.image, player.rect)
     player.update(dt)
-    crate_g.draw(Camera_img)
-    crate_g.update(dt)
-    wall_g.draw(Camera_img)
-    wall_g.update(dt)
     #this is the camra stuff
     Screen.blit(Camera_img,(0, 0), Camera_rect)
 
