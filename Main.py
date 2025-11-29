@@ -23,6 +23,13 @@ crate_g = pygame.sprite.Group()
 c = objects.Crate(64, 64)
 crate_g.add(c)
 
+wall_g = pygame.sprite.Group()
+w = object.Wall(128, 128)
+wall_g.add(w)
+
+groups = [crate_g]
+player.groups_list = groups
+
 #this is the game loop
 run = True
 while run == True:
