@@ -28,8 +28,11 @@ wall_g = pygame.sprite.Group()
 w = objects.Wall(128, 128)
 wall_g.add(w)
 
+w2 = objects.Wall(32, 128)
+wall_g.add(w2)
+
 groups = {'CRATE':crate_g, 'WALL':wall_g}
-Map_camera.gen_map(pygame.image.load("textures/Map final.png"), groups)
+# Map_camera.gen_map(pygame.image.load("textures/Map final.png"), groups)
 player.groups_list = groups
 
 #this is the game loop
