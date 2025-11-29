@@ -24,10 +24,10 @@ c = objects.Crate(64, 64)
 crate_g.add(c)
 
 wall_g = pygame.sprite.Group()
-w = object.Wall(128, 128)
+w = objects.Wall(128, 128)
 wall_g.add(w)
 
-groups = [crate_g]
+groups = [crate_g, wall_g]
 player.groups_list = groups
 
 #this is the game loop
@@ -40,6 +40,8 @@ while run == True:
     player.update(dt)
     crate_g.draw(Screen)
     crate_g.update(dt)
+    wall_g.draw(Screen)
+    wall_g.update(dt)
 
     #this is the event loop
     for event in pygame.event.get():
