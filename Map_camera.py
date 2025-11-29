@@ -5,7 +5,7 @@ FREE =pygame.Color(61, 117, 32)
 WALL = pygame.Color(115, 73, 22)
 SPIKE = pygame.Color(89, 85, 80)
 CRATE = pygame.Color(115, 22, 22)
-SWITCH = pygame.Color(84, 32, 117)
+LEVER = pygame.Color(84, 32, 117)
 ICE = pygame.Color(22, 97, 115)
 WWT = pygame.Color(255, 255, 255)
 
@@ -26,7 +26,7 @@ def gen_map(image: pygame.Surface, groups: dict[str:pygame.sprite.Group]):
                 pass
             elif pixel == CRATE:
                 pass
-            elif pixel == SWITCH:
+            elif pixel == LEVER:
                 pass
             elif pixel == ICE:
                 pass

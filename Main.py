@@ -12,6 +12,8 @@ Screen_Height = 320
 
 #Makes a camera, Screen, and player
 Screen = pygame.display.set_mode((Screen_Height, Screen_Height))
+Camera_img = pygame.Surface((32*32, 32*32))
+Camera_rect = Screen.get_rect()
 clock = pygame.time.Clock()
 player = objects.Player(Screen_Width/2, Screen_Height/2)
 Map = pygame.image.load("textures/Map test.png")
@@ -28,7 +30,13 @@ wall_g = pygame.sprite.Group()
 w = objects.Wall(128, 128)
 wall_g.add(w)
 
-groups = {'CRATE':crate_g, 'WALL':wall_g}
+free_g = pygame.sprite.Group()
+spike_g = pygame.sprite.Group()
+lever_g = pygame.sprite.Group()
+ice_g = pygame.sprite.Group()
+wwt_g = pygame.sprite.Group()
+
+groups = {'CRATE':crate_g, 'WALL':wall_g, 'FREE':free_g, 'SPIKE':spike_g, 'LEVER':lever_g, 'ICE':ice_g, 'WWT':wwt_g}
 Map_camera.gen_map(pygame.image.load("textures/Map final.png"), groups)
 player.groups_list = groups
 
@@ -37,13 +45,17 @@ run = True
 while run == True:
 
     #this referches and draws the screen
+    Camera_rect.center = (player.rect.center[0], player.rect.center[1])
     Screen.fill((0, 0, 0))
-    Screen.blit(player.image, player.rect)
+    Camera_img.fill((0, 0, 0))
+    Camera_img.blit(player.image, player.rect)
     player.update(dt)
-    crate_g.draw(Screen)
+    crate_g.draw(Camera_img)
     crate_g.update(dt)
-    wall_g.draw(Screen)
+    wall_g.draw(Camera_img)
     wall_g.update(dt)
+    #this is the camra stuff
+    Screen.blit(Camera_img,(0, 0), Camera_rect)
 
     #this is the event loop
     for event in pygame.event.get():
