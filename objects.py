@@ -49,6 +49,6 @@ class Crate(pygame.sprite.Sprite):
 class Wall(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("textures/Crate.png")
+        self.image = pygame.image.load("textures/Wall.png")
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
