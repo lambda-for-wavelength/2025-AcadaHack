@@ -19,7 +19,16 @@ class Player(pygame.sprite.Sprite):
         if self.timer >= TICK_RATE:
             self.dir = pygame.Vector2(0,0)
             Key = pygame.key.get_pressed()
-            if Key[pygame.K_w] == True:
+            if Key[pygame.K_w] == True: 
+                # for i in range(self.groups_list[1]):
+                #     walls_position = self.groups_list[1][i]
+                #     if  walls_position == (self.rect.topleft[0] + 0, self.rect.topleft[1] - 32):
+                #         Key[pygame.K_w] = False
+                # else:   
+                #     Key[pygame.K_w] = True
+                # check if wall in front of us
+                # if no wall above us move
+                # else: don't 
                 self.rect.move_ip(0, -32)
                 self.dir.y = -1
             elif Key[pygame.K_a] == True:
