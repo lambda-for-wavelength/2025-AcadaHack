@@ -1,14 +1,16 @@
 import pygame
 import objects
 
-FREE =pygame.Color(61, 117, 32)
+#this sets the blocks colers for the color map
+FREE = pygame.Color(61, 117, 32)
 WALL = pygame.Color(115, 73, 22)
 SPIKE = pygame.Color(89, 85, 80)
 CRATE = pygame.Color(115, 22, 22)
-SWITCH = pygame.Color(84, 32, 117)
+LEVER = pygame.Color(84, 32, 117)
 ICE = pygame.Color(22, 97, 115)
 WWT = pygame.Color(255, 255, 255)
 
+#this generats all the blocks
 def gen_map(image: pygame.Surface, groups: dict[str:pygame.sprite.Group]):
 
     final_map = pygame.Surface((image.get_width() * 32, image.get_height() * 32))
@@ -23,12 +25,19 @@ def gen_map(image: pygame.Surface, groups: dict[str:pygame.sprite.Group]):
                 i = objects.Wall(x*32, y*32)
                 groups['WALL'].add(i)
             elif pixel == SPIKE:
-                pass
+                i = objects.Spike(x*32, y*32)
+                groups['SPIKE'].add(i)
             elif pixel == CRATE:
-                pass
-            elif pixel == SWITCH:
-                pass
+                i = objects.Free(x*32, y*32)
+                groups['FREE'].add(i)
+                i = objects.Crate(x*32, y*32)
+                groups['CRATE'].add(i)
+            elif pixel == LEVER:
+                i = objects.Lever(x*32, y*32)
+                groups['LEVER'].add(i)
             elif pixel == ICE:
-                pass
+                i = objects.Ice(x*32, y*32)
+                groups['ICE'].add(i)
             elif pixel == WWT:
-                pass
+                i = objects.WWT(x*32, y*32)
+                groups['WWT'].add(i)
